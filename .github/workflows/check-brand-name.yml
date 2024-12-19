@@ -108,8 +108,8 @@ jobs:
               if (foundTerms.size > 0) {
                 // Create a comment body with the found deprecated terms
                 const commentBody = `
-                > [!NOTE]
-                > This is not a required check for merging this PR, just for your reference.
+              > [!NOTE]
+              > This is not a required check for merging this PR, just for your reference.
 
                **Attention:** The following old brand terms were found in your changes:
                   ${Array.from(foundTerms).map(term => `- **${term}**`).join('\n')}
