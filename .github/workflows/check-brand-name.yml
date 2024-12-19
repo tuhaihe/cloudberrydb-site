@@ -112,9 +112,9 @@ jobs:
               > This is not a required check for merging this PR, just for your reference.
 
                **Attention:** The following old brand terms were found in your changes:
-                  ${Array.from(foundTerms).map(term => `- **${term}**`)}
+                  ${Array.from(foundTerms).map(term => `\`${term}\``)}
 
-                Please consider replacing them with "Apache Cloudberry" or "Cloudberry" where appropriate. Thank you for ensuring consistency in our branding! 🙏
+              Please consider replacing them with "Apache Cloudberry" or "Cloudberry" where appropriate. Thank you for ensuring consistency in our branding! 🙏
               `;
 
                 // Post a comment on the PR with the found deprecated terms
