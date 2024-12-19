@@ -7,6 +7,9 @@
 [![GitHub 
 Discussions](https://img.shields.io/github/discussions/cloudberrydb/cloudberrydb)](https://github.com/orgs/cloudberrydb/discussions)
 
+CloudberryDB New site to test the changes.
+
+
 ---
 
 ## Website Directory Structure
