@@ -1,5 +1,7 @@
 ## Cloudberry Database Website & Documentation
 
+Add Cloudberry Database website test.
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6f2dcedf-68eb-479e-9cf6-5c788d173572/deploy-status)](https://app.netlify.com/sites/cloudberrydb/deploys)
 [![Slack](https://img.shields.io/badge/Join_Slack-6a32c9)](https://communityinviter.com/apps/cloudberrydb/welcome)
 [![Twitter Follow](https://img.shields.io/twitter/follow/cloudberrydb)](https://twitter.com/cloudberrydb)
