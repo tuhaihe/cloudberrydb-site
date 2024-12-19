@@ -46,6 +46,9 @@ on:
 jobs:
   check-brand-name:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
 
     steps:
       - name: Checkout code
@@ -69,41 +72,59 @@ jobs:
               "GPDB"
             ];
 
-            // Fetch the list of changed files in the PR
-            const { data: files } = await github.rest.pulls.listFiles({
-              owner,
-              repo,
-              pull_number: prNumber,
-            });
+            try {
+              // Fetch the list of changed files in the PR
+              const { data: files } = await github.rest.pulls.listFiles({
+                owner,
+                repo,
+                pull_number: prNumber,
+              });
 
-            // Check diffs for deprecated terms
-            const foundTerms = new Set();
-            for (const file of files) {
-              if (file.patch) {
-                for (const term of deprecatedTerms) {
-                  if (file.patch.includes(term)) {
-                    foundTerms.add(term);
+              // Check if there are any files changed in the PR
+              if (!files.length) {
+                console.log("No files changed in this PR.");
+                return;
+              }
+
+              // Initialize a set to store the found deprecated terms
+              const foundTerms = new Set();
+
+              // Iterate over each file in the PR changes
+              for (const file of files) {
+                // Check if the file has a patch (i.e., it has changes)
+                if (file.patch) {
+                  // Iterate over each deprecated term
+                  for (const term of deprecatedTerms) {
+                    // Check if the deprecated term is in the file's patch
+                    if (file.patch.includes(term)) {
+                      // Add the deprecated term to the set of found terms
+                      foundTerms.add(term);
+                    }
                   }
                 }
               }
-            }
 
-            // Post a comment on the PR if any terms are found
-            if (foundTerms.size > 0) {
-              const commentBody = `
- > [!NOTE]
- > This is not a required check for merging this PR, just for your reference.
+              // Check if any deprecated terms were found
+              if (foundTerms.size > 0) {
+                // Create a comment body with the found deprecated terms
+                const commentBody = `
+                > [!NOTE]
+                > This is not a required check for merging this PR, just for your reference.
+                **Attention:** The following old brand terms were found in your changes: 
+                  ${Array.from(foundTerms).map(term => `- **${term}**`).join('\n')}
+                  
+                Please consider replacing them with "Apache Cloudberry" or "Cloudberry" where appropriate. Thank you for ensuring consistency in our branding! 🙏
+                `;
 
-**Attention:** The following old brand terms were found in your changes: ${[...foundTerms].map(term => `- **${term}**`).join('\n')}
-                
-Please consider replacing them with "Apache Cloudberry" or "Cloudberry" where appropriate. 
-Thank you for ensuring consistency in our branding! 🙏
-`;
-              // Post a comment on the PR with the found deprecated terms
-              await github.rest.issues.createComment({
-                owner,
-                repo,
-                issue_number: prNumber,
-                body: commentBody,
-              });
+                // Post a comment on the PR with the found deprecated terms
+                await github.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: prNumber,
+                  body: commentBody,
+                });
+              }
+            } catch (error) {
+              // Log any errors that occur during the script execution
+              console.error("Error checking for deprecated terms:", error);
             }
