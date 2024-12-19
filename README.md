@@ -9,6 +9,8 @@ Discussions](https://img.shields.io/github/discussions/cloudberrydb/cloudberrydb
 
 CloudberryDB New site to test the changes.
 
+I want to test CloudberryDB first.
+
 
 ---
 
