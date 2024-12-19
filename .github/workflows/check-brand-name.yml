@@ -107,24 +107,15 @@ jobs:
               // Check if any deprecated terms were found
               if (foundTerms.size > 0) {
                 // Create a comment body with the found deprecated terms
-                const isTermInCommit = (term) => {
-                  for (const file of files) {
-                    if (file.patch && file.patch.includes(term)) {
-                      return true;
-                    }
-                  }
-                  return false;
-                };
-
                 const commentBody = `
-              > [!NOTE]
-              > This is not a required check for merging this PR, just for your reference.
-              
-              **Attention:** The following old brand terms were found in your changes: 
-                  ${Array.from(foundTerms).filter(term => isTermInCommit(term)).map(term => `- **${term}**`).join('\n')}
-                  
+                > [!NOTE]
+                > This is not a required check for merging this PR, just for your reference.
+
+               **Attention:** The following old brand terms were found in your changes:
+                  ${Array.from(foundTerms).map(term => `- **${term}**`).join('\n')}
+
                 Please consider replacing them with "Apache Cloudberry" or "Cloudberry" where appropriate. Thank you for ensuring consistency in our branding! 🙏
-                `;
+              `;
 
                 // Post a comment on the PR with the found deprecated terms
                 await github.rest.issues.createComment({
