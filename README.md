@@ -7,9 +7,11 @@
 [![GitHub 
 Discussions](https://img.shields.io/github/discussions/cloudberrydb/cloudberrydb)](https://github.com/orgs/cloudberrydb/discussions)
 
-CloudberryDB New site to test the changes.
+Cloudberry New site to test the changes.
 
-I want to test Greenplum.
+I want to test Apache Cloudberry.
+
+Test CliudBerry
 
 
 ---
