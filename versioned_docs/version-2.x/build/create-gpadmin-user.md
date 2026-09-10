@@ -16,7 +16,7 @@ If `sudo` & `git` command is not already installed, run the following command to
 dnf install -y sudo git
 ```
 </TabItem>
-<TabItem value="ubuntu" label="For Ubuntu 20.04+" default>
+<TabItem value="ubuntu" label="For Ubuntu 22.04+" default>
 ```bash
 apt update && apt install -y sudo git
 ```
@@ -63,7 +63,7 @@ This script performs three main tasks as the `gpadmin` user:
 The script uses a heredoc (EOF) block to execute multiple commands under the `gpadmin` user context. This will be used multiple time throughout these instructions.
 
 <Tabs>
-<TabItem value="cloudberry-2.1.0" label="Apache Cloudberry 2.1.0" default>
+<TabItem value="cloudberry-2.1.0" label="Apache Cloudberry 2.1.0+" default>
 ```bash
 sudo -u gpadmin bash <<'EOF'
 # Add Cloudberry environment setup to .bashrc
